@@ -1,0 +1,13 @@
+{
+  "credenciales": {
+    "sysadmin": {
+        "user": "ventas@nktel.com.bo",
+        "password": "200605880cbba"
+    },
+    "standarduser": {
+      "user": "ventas@nktel.com.bo",
+      "password": "200605880cbba"
+    }
+  },
+  "url": "https://login.salesforce.com"
+}

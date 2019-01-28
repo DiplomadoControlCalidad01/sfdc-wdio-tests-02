@@ -1,0 +1,17 @@
+{
+  "name": "automatizacion",
+  "version": "1.0.0",
+  "description": "test oficial",
+  "main": "index.js",
+  "scripts": {
+    "test": "wdio"
+  },
+  "author": "Efrain",
+  "license": "ISC",
+  "devDependencies": {
+    "wdio-mocha-framework": "^0.6.4",
+    "wdio-selenium-standalone-service": "0.0.12",
+    "wdio-spec-reporter": "^0.1.5",
+    "webdriverio": "^4.14.2"
+  }
+}
