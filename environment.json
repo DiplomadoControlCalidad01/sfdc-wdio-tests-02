@@ -9,5 +9,6 @@
       "password": "200605880cbba"
     }
   },
-  "url": "https://login.salesforce.com"
+  "url": "https://login.salesforce.com",
+  "tiempoespera": 30000
 }
