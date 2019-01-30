@@ -45,23 +45,41 @@ class ObjetoPersonalizado{
     static addNumeroInicio(NumeroInicio){
         commonActions.setvalue('#StartingNo',NumeroInicio);
     }
-    static addPermitirInformes(){
-        commonActions.click('#options_0');
+    static permitirInformes(boolean){
+        commonActions.SelecionComboBox('#options_0',boolean);
     }
-    static addPermitirActividades(){
-        commonActions.click('#NameAutoNumberMask');
+    static permitirActividades(boolean){
+        commonActions.SelecionComboBox('#options_3',boolean);
     }
-    static addSeguimientoDeHistorialCampos(){
-        commonActions.click('#options_6');
+    static seguimientoDeHistorialCampos(boolean){
+        commonActions.SelecionComboBox('#options_6',boolean);
     }
-    static addPermitirGruposChatter(){
-        commonActions.click('#options_32');
+    static permitirGruposChatter(boolean){
+        commonActions.SelecionComboBox('#options_32',boolean);
     }
-    /*static addPermitirColaboracion(){
-        commonAction.click('')
-    }*/
+    static permitirColaboracion(boolean){
+        commonActions.SelecionComboBox('#options_28',boolean);
+    }
     static PermitirAccesoAlaAPI_Masiva(boolean){
-        commonActions.comboBox('#options_29',boolean);
+        commonActions.SelecionComboBox('#options_29',boolean);
+    }
+    static PermitirAccesoAlaAPI_Transmision(boolean){
+        commonActions.SelecionComboBox('#options_30',boolean);
+    }
+    static EstadoDeImplementacionEnDesarrollo(){
+        commonActions.click('#InDevelopment1');
+    }
+    static PermitirBuscar(boolean){
+        commonActions.SelecionComboBox('#options_20',boolean);
+    }
+    static AgregarNotasyArchivosAdjuntos(boolean){
+        commonActions.SelecionComboBox('#NoteRL',boolean);
+    }
+    static IniciarAsistenteFichaPersonalizadaDespuesdeGuardar(boolean){
+        commonActions.SelecionComboBox('#CreateTab',boolean);
+    }
+    static Guardar(){
+        commonActions.click('td#bottomButtonRow>input[name=save]');
     }
 }
 module.exports = ObjetoPersonalizado;

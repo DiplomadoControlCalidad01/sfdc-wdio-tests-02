@@ -16,12 +16,15 @@ class CommonActions{
         browser.waitForVisible(locator,tiempoEspera);
         browser.frame(browser.element(locator).value);
     }
-    static Selecion(locator,numero){
-        let boolean = new Boolean(numero);
-        browser.selectByAttribute()
-        //browser.element(locator).set(value=boolean);
-        browser.selectByValue(locator,boolean);
+    static SelecionComboBox(locator,numero){
+       let bool = new Boolean(numero);
+       let navegador = browser.isSelected(locator);
+       if(bool!=navegador){
+           browser.waitForVisible(locator,tiempoEspera);
+           browser.element(locator).click();
+       }
     }
+
 }
 
 module.exports = CommonActions;
