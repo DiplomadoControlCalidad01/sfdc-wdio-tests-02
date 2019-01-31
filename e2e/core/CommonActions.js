@@ -17,14 +17,17 @@ class CommonActions{
         browser.frame(browser.element(locator).value);
     }
     static SelecionComboBox(locator,numero){
-       let bool = new Boolean(numero);
+       let bool = Boolean(numero);
        let navegador = browser.isSelected(locator);
-       if(bool!=navegador){
+       if(bool != navegador){
            browser.waitForVisible(locator,tiempoEspera);
            browser.element(locator).click();
        }
     }
-
+    static getText(locator){
+        browser.waitForVisible(locator,tiempoEspera);
+        return browser.getText(locator);
+    }
 }
 
 module.exports = CommonActions;
