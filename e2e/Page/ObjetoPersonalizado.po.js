@@ -2,21 +2,20 @@ const commonActions = require('../core/CommonActions');
 
 class ObjetoPersonalizado{
     constructor(){
-        //const locatorInicio = '//ul[contains(@class,\'tabBarItems slds-grid\')]//span[contains(@class,\'title slds-truncate\')][contains(text(),\'Inicio\')]';
-        const locatorConfiguration = '//*[@class=\'slds-icon slds-icon-text-default\']';
-        const locatorselecConfig = '';
+        //const locatorConfiguration = '//*[@class=\'slds-icon slds-icon-text-default\']';
         const locatorCrear = '.slds-button.slds-button--neutral.onesetupCreateMenuTrigger';
         const locatorLinkObjetoPersonalizado = '//span[contains(text(),\'Objeto personalizado\')]';
         const locatoriframe = '//iframe[contains(@id,"vfFrameId_")]';
-
-        //commonActions.click(locatorInicio);
-        commonActions.click(locatorConfiguration);
+        // commonActions.click(locatorConfiguration);
         commonActions.click(locatorCrear);
         commonActions.click(locatorLinkObjetoPersonalizado);
         commonActions.iframe(locatoriframe);
+
     }
-    //Op = Objeto Personalizado
-    CrearObjetoPersonalizado(opJson){
+    static crearinstancia(){
+        return new ObjetoPersonalizado();
+    }
+    static CrearObjetoPersonalizado(opJson){
         let opStep = {
             "Etiqueta": () => commonActions.setvalue('#MasterLabel',opJson.Etiqueta),
             "EtiquetaPlural": () => commonActions.setvalue('#PluralLabel',opJson.EtiquetaPlural),
@@ -40,8 +39,9 @@ class ObjetoPersonalizado{
         Object.keys(opJson).forEach(key => {
             opStep[key].call();
         });
+        commonActions.pause(1000);
     }
-    saveObjetoPersonalizado(){
+    static saveObjetoPersonalizado(){
         commonActions.click('td#bottomButtonRow>input[name=save]');
     }
 }

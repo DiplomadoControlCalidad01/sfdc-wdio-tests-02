@@ -28,6 +28,9 @@ class CommonActions{
         browser.waitForVisible(locator,tiempoEspera);
         return browser.getText(locator);
     }
+    static pause(){
+        browser.pause(20000);
+    }
 }
 
 module.exports = CommonActions;

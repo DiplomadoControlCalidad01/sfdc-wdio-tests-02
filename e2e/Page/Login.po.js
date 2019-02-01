@@ -1,7 +1,6 @@
 const ambiente = require('../../environment');
 const commonAction = require('../core/CommonActions');
 
-
 class Login{
     constructor(){
         browser.url(ambiente.url);
@@ -9,7 +8,6 @@ class Login{
         this.locatorpassword = '#password';
         this.locatorBotonIniciarsecion = '#Login';
     }
-
     llenarCampoUsario(){
         commonAction.setvalue(this.locatoruser,ambiente.credenciales.sysadmin.user);
     }
@@ -24,6 +22,7 @@ class Login{
         login.llenarCampoUsario();
         login.llenarCampoPassword();
         login.ClickiniciarSesion();
+        commonAction.pause();
     }
 }
 module.exports = Login ;
