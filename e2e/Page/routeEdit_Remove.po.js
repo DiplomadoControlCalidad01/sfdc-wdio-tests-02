@@ -2,6 +2,7 @@ const commonActions = require('../core/CommonActions.js');
 class routeEdit_Remove{
   constructor(){
       this.locatorBotonModificacion = '//span[contains(text(),"Modificar")]';
+      //span[contains(text(),"Objeto personalizado")]
       this.locatorPanelBuscarObjeto = '//input[@class=\'slds-input input\']';
       this.locatorIframe = 'iframe[name *="vfFrameId_"]'; // '//iframe[contains(@id,"vfFrameId_")]'
       this.locatorBotonEliminar = '//span[contains(text(),"Eliminar")]';

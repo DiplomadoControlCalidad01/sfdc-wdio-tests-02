@@ -18,6 +18,7 @@ class CommonActions {
     static iframe(locator) {
         browser.waitForVisible(locator, tiempoEspera);
         browser.frame(browser.element(locator).value);
+        browser.pause(10000);
     }
 
     static SelecionComboBox(locator, numero) {
