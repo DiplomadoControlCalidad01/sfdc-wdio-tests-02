@@ -36,7 +36,7 @@ class CommonActions {
     }
 
     static pause() {
-        browser.pause(10000);
+        browser.pause(9000);
     }
 
     static seleccionVentanaEmegente(locator, value) {

@@ -10,5 +10,9 @@ class header{
     static irAPanelObjetoPersonalizado(){
         return new header();
     }
+    static clickGestorObjeto()
+    {
+        commonActions.click(this.clickGestorObjeto());
+    }
 }
 module.exports= header;

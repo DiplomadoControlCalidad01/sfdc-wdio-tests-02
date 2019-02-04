@@ -2,6 +2,7 @@ const commonActions = require('../core/CommonActions');
 
 class addObjeto{
     constructor(){
+        this.locatorGestorObjeto = '//a[@class="tabHeader slds-context-bar__label-action "]//span[contains(text(),"Gestor de objetos")]';
         this.locatorbotonAgregar = '//a[@class="slds-button slds-button--icon"]';
         this.locatorbotonCrearObjeto = '//span[contains(text(),"Crear Objeto")]';
         this.locatoriframe = '//iframe[contains(@id,"vfFrameId_")]';
@@ -35,8 +36,14 @@ class addObjeto{
         commonActions.pause(10000);
     };
     saveObjetoPersonalizado(){
-
         commonActions.click('td#bottomButtonRow>input[name=save]');
+    }
+    iraGestorObjetos(){
+        commonActions.click(this.locatorGestorObjeto);
+    }
+    detalleObjeto(nombre){
+        const locatorEnlace = '//th//a[contains(text(),"'+nombre+'")]';
+        commonActions.click(locatorEnlace);
     }
 }
 module.exports = addObjeto;

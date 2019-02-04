@@ -1,16 +1,14 @@
 const commonActions = require('../core/CommonActions');
 class viewObjetosPers{
     constructor(){
-        const locatorgestorobjetosss = '//a[@class=\'breadcrumb uiOutputURL onesetupBreadcrumb\'][contains(text(),\'Gestor de objetos\')]';
+        this.locatorTable = '//table[@class="slds-table slds-table--bordered uiVirtualDataGrid--default uiVirtualDataGrid"]//tbody//tr';
+
     }
 
-   static crearInstanciaVOP(){
-             return new viewObjetosPers();
-    }
-    static getListaGestorObjetos(){
+    getListaGestorObjetos(){
         let etiquetas = [];
         commonActions.pause(30000);
-        let filas = $$('//table[@class="slds-table slds-table--bordered uiVirtualDataGrid--default uiVirtualDataGrid"]//tbody//tr');
+        let filas = $$(this.locatorTable);
         for (let i = 0; i < filas.length; i++) {
             const column = filas[i].$$('th');
             let etiqueta = column[0].getText();
