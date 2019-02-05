@@ -1,46 +1,35 @@
 const commonActions = require('../core/CommonActions');
-
-class addObjeto{
+const Objeto = require('../Page/objeto.po');
+class addObjeto extends Objeto{
     constructor(){
-        this.locatorGestorObjeto = '//a[@class="tabHeader slds-context-bar__label-action "]//span[contains(text(),"Gestor de objetos")]';
-        this.locatorbotonAgregar = '//a[@class="slds-button slds-button--icon"]';
+        super();
+        this.l_NotasYarchivosAdjuntos = '#NoteRL';
+        this.l_AsistenteFichaPersonalizad = '#CreateTab';
+        this.locatorBotonAgregar = '//a[@class="slds-button slds-button--icon"]';
         this.locatorbotonCrearObjeto = '//span[contains(text(),"Crear Objeto")]';
-        this.locatoriframe = '//iframe[contains(@id,"vfFrameId_")]';
-        this.lacatorCO1 = '#options_28';
-        this.locatorCO2 = '#options_29';
-        this.locatorCO3 = '#options_30';
-        this.locatorMostrarFormato = '#NameAutoNumberMask';
-        this.locatorNumeroInicio = '#StartingNo';
-        commonActions.click(this.locatorbotonAgregar);
+        commonActions.click(this.locatorBotonAgregar);
         commonActions.click(this.locatorbotonCrearObjeto);
-        commonActions.iframe(this.locatoriframe);
+        commonActions.iframe(this.locatorIframe);
     }
     CrearObjetoPersonalizado(opJson){
-
-        commonActions.setvalue('#MasterLabel',opJson.Etiqueta),
-        commonActions.setvalue('#PluralLabel',opJson.EtiquetaPlural),
-        commonActions.click('#Gender>option[value='+opJson.Sexo+']'),
-        commonActions.setvalue('#DeveloperName',opJson.NombreObjeto),
-        commonActions.setvalue('#Description',opJson.Descripcion),
-        commonActions.setvalue('#MasterNameFieldLabel',opJson.NombreDelRegistro),
-        commonActions.seleccionTipoDato('#AutoNo>option[value='+opJson.TipoDeDatos+']',this.locatorMostrarFormato,this.locatorNumeroInicio,opJson.TipoDeDatos,opJson.MostrarFormato,opJson.NumeroInicio),
-        commonActions.SelecionComboBox('#options_0',opJson.PermitirInformes),
-        commonActions.SelecionComboBox('#options_3',opJson.PermitirActividades),
-        commonActions.SelecionComboBox('#options_6',opJson.PermitirSeguimientoDeHistorial),
-        commonActions.SelecionComboBox('#options_32',opJson.PermitirGruposDeChatter),
-        commonActions.clasificacionDeObjeto(this.lacatorCO1,this.locatorCO2,this.locatorCO3,opJson.ClasificacionDeObjeto),
-        commonActions.click('//label[contains(text(),"'+opJson.EstadoDeImplementacion+'")]'),
-        commonActions.SelecionComboBox('#options_20',opJson.PermitirBuscar),
-        commonActions.SelecionComboBox('#NoteRL',opJson.AgregarNotasYarchivosAdjuntos),
-        commonActions.SelecionComboBox('#CreateTab',opJson.IniciarAsistenteFichaPersonalizadaDespuesCrear)
-        commonActions.pause(10000);
+        commonActions.setvalue(this.l_Etiqueta,opJson.Etiqueta),
+        commonActions.setvalue(this.l_EtiquetaPlural,opJson.EtiquetaPlural),
+        commonActions.click(this.l_Sexo+opJson.Sexo+']'),
+        commonActions.setvalue(this.l_NombreObjeto,opJson.NombreObjeto),
+        commonActions.setvalue(this.l_Descripcion,opJson.Descripcion),
+        commonActions.setvalue(this.l_NombreRegistro,opJson.NombreDelRegistro),
+        commonActions.seleccionTipoDato(this.l_TipoDeDato+opJson.TipoDeDatos+']',this.l_MostrarFormato,this.l_NumeroInicio,opJson.TipoDeDatos,opJson.MostrarFormato,opJson.NumeroInicio),
+        commonActions.SelecionComboBox(this.l_PermitirInformes,opJson.PermitirInformes),
+        commonActions.SelecionComboBox(this.l_PermitirActividades,opJson.PermitirActividades),
+        commonActions.SelecionComboBox(this.l_SeguimientoHistorial,opJson.PermitirSeguimientoDeHistorial),
+        commonActions.SelecionComboBox(this.l_GruposChatter,opJson.PermitirGruposDeChatter),
+        commonActions.clasificacionDeObjeto(this.l_PermitirColoboracion,this.l_API_Masiva,this.l_API_Transmicion,opJson.ClasificacionDeObjeto),
+        commonActions.click(this.l_EstadoImplementacion+opJson.EstadoDeImplementacion+'")]'),
+        commonActions.SelecionComboBox(this.l_PermitirBuscar,opJson.PermitirBuscar),
+        commonActions.SelecionComboBox(this.l_NotasYarchivosAdjuntos,opJson.AgregarNotasYarchivosAdjuntos),
+        commonActions.SelecionComboBox(this.l_AsistenteFichaPersonalizad,opJson.IniciarAsistenteFichaPersonalizadaDespuesCrear)
+        commonActions.pause();
     };
-    saveObjetoPersonalizado(){
-        commonActions.click('td#bottomButtonRow>input[name=save]');
-    }
-    iraGestorObjetos(){
-        commonActions.click(this.locatorGestorObjeto);
-    }
     detalleObjeto(nombre){
         const locatorEnlace = '//th//a[contains(text(),"'+nombre+'")]';
         commonActions.click(locatorEnlace);

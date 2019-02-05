@@ -24,6 +24,7 @@ class CommonActions {
     static SelecionComboBox(locator, numero) {
         let bool = Boolean(numero);
         let navegador = browser.isSelected(locator);
+        browser.pause(3000);
         if (bool != navegador) {
             browser.waitForVisible(locator, tiempoEspera);
             browser.element(locator).click();
@@ -36,21 +37,21 @@ class CommonActions {
     }
 
     static pause() {
-        browser.pause(9000);
+        browser.pause(10000);
     }
 
     static seleccionVentanaEmegente(locator, value) {
         let stateActual = Boolean(value);
         let statelast = browser.isSelected(locator);
-        if (statelast == false) {
-            if (stateActual == true) {
+        if (statelast === false) {
+            if (stateActual === true) {
                 browser.waitForVisible(locator, tiempoEspera);
                 browser.element(locator).click();
                 browser.alertAccept();
             }
         }
         else {
-            if (stateActual == false) {
+            if (stateActual === false) {
                 browser.waitForVisible(locator, tiempoEspera);
                 browser.element(locator).click();
             }

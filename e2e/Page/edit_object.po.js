@@ -1,38 +1,39 @@
 const commonActions = require('../core/CommonActions');
-const RouteEdit_remove = require('../Page/routeEdit_Remove.po');
-class edit_object{
+const Objeto = require('../Page/objeto.po');
+const SearchObjeto = require('../Page/searchObjeto.po');
+class edit_object extends Objeto{
      constructor(){
-         this.locatorBotonGuardar = '//td[@class="pbButtonb"]//input[@value="Guardar"]';
-         this.lacatorCO1 = '#options_28';
-         this.locatorCO2 = '#options_29';
-         this.locatorCO3 = '#options_30';
-         this.locatorMostrarFormato = '#NameAutoNumberMask';
-         this.locatorNumeroInicio = '#StartingNo';
+         super();
+         this.locatorBotonModificacion = '//span[contains(text(),"Modificar")]';
      }
      modifyObject(newobject){
-         let routeEdit_Remove = new RouteEdit_remove();
-         routeEdit_Remove.irFormularioEdit(newobject.Antigua_Etiqueta);
+         let searchObjeto = new SearchObjeto();
+         let ObjetoAnterior = searchObjeto.buscarObjeto(newobject.Antigua_Etiqueta);
+         commonActions.click('//th//a[contains(text(),"'+ObjetoAnterior+'")]');
+         commonActions.click(this.locatorBotonModificacion);
+         commonActions.iframe(this.locatorIframe);
+         commonActions.pause();
          this.fillObject(newobject);
      }
      fillObject(newObject){
-         commonActions.setvalue('#MasterLabel',newObject.new_Etiqueta);
-         commonActions.setvalue('#PluralLabel',newObject.new_EtiquetaPlural);
-         commonActions.click('#Gender>option[value='+newObject.new_Sexo+']');
-         commonActions.setvalue('#DeveloperName',newObject.new_NombreObjeto);
-         commonActions.setvalue('#Description',newObject.new_Descripcion);
-         commonActions.setvalue('#MasterNameFieldLabel',newObject.new_NombreDelRegistro);
-         commonActions.seleccionTipoDato('#AutoNo>option[value='+newObject.new_TipoDeDatos+']',
-             this.locatorMostrarFormato,this.locatorNumeroInicio,newObject.new_TipoDeDatos,
+
+         commonActions.setvalue(this.l_Etiqueta,newObject.new_Etiqueta);
+         commonActions.setvalue(this.l_EtiquetaPlural,newObject.new_EtiquetaPlural);
+         commonActions.click(this.l_Sexo+newObject.new_Sexo+']');
+         commonActions.setvalue(this.l_NombreObjeto,newObject.new_NombreObjeto);
+         commonActions.setvalue(this.l_Descripcion,newObject.new_Descripcion);
+         commonActions.setvalue(this.l_NombreRegistro,newObject.new_NombreDelRegistro);
+         commonActions.seleccionTipoDato(this.l_TipoDeDato+newObject.new_TipoDeDatos+']', this.l_MostrarFormato,this.l_NumeroInicio,newObject.new_TipoDeDatos,
              newObject.new_MostrarFormato,newObject.new_NumeroInicio);
-         commonActions.SelecionComboBox('#options_0',newObject.new_PermitirInformes);
-         commonActions.seleccionVentanaEmegente('#options_3',newObject.new_PermitirActividades);
-         commonActions.SelecionComboBox('#options_6',newObject.new_PermitirSeguimientoDeHistorial);
-         commonActions.SelecionComboBox('#options_32',newObject.new_PermitirGruposDeChatter);
-         commonActions.clasificacionDeObjeto(this.lacatorCO1,this.locatorCO2,this.locatorCO3,newObject.new_ClasificacionObjeto);
-         commonActions.click('#InDevelopment1');
-         commonActions.SelecionComboBox('#options_20',newObject.new_PermitirBuscar);
+         commonActions.SelecionComboBox(this.l_PermitirInformes,newObject.new_PermitirInformes);
+         commonActions.seleccionVentanaEmegente(this.l_PermitirActividades,newObject.new_PermitirActividades);
+         commonActions.SelecionComboBox(this.l_SeguimientoHistorial,newObject.new_PermitirSeguimientoDeHistorial);
+         commonActions.SelecionComboBox(this.l_GruposChatter,newObject.new_PermitirGruposDeChatter);
+         commonActions.clasificacionDeObjeto(this.l_PermitirColoboracion,this.l_API_Masiva,this.l_API_Transmicion,newObject.new_ClasificacionObjeto);
+         commonActions.click(this.l_EstadoImplementacion+newObject.new_EstadoDeImplementacion+'")]');
+         commonActions.SelecionComboBox(this.l_PermitirBuscar,newObject.new_PermitirBuscar);
          commonActions.pause();
-         commonActions.click(this.locatorBotonGuardar);
+         this.GuardarObjeto();
      }
 
 }

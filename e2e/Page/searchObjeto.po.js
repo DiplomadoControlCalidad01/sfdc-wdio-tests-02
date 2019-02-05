@@ -4,27 +4,34 @@ class searchObjeto{
         this.locatorPanelBuscarObjeto = '//input[@class=\'slds-input input\']';
         this.locatorFilastable = '//table[@class="slds-table slds-table--bordered uiVirtualDataGrid--default uiVirtualDataGrid"]//tr';
     }
-    buscarobjeto(nombreEtiqueta){
+    buscarObjeto(nombreEtiqueta){
         commonActions.setvalue(this.locatorPanelBuscarObjeto,nombreEtiqueta);
         commonActions.pause();
-        const etiquetaRecuperada = this.veficarExistencia();
-
-        if(etiquetaRecuperada===nombreEtiqueta){
-            console.log('Existe el objeto con Etiqueta: '+etiquetaRecuperada);
-            return etiquetaRecuperada;
-            //browser.sendAlertText('es una alerta made by efrain');
-        }else {
-            console.log('la etiqueta NO EXISTE: '+nombreEtiqueta);
-            return 'No existe Objeto';
+        const getEtiquetas = this.getListaTable(nombreEtiqueta);
+        let respuesta;
+        if(typeof getEtiquetas !== 'undefined' && getEtiquetas.length > 0) {
+            for (var valor of getEtiquetas) {
+                if (valor === nombreEtiqueta) {
+                    console.log('Existe el objeto con Etiqueta: ' + valor);
+                    respuesta = valor;
+                    //browser.sendAlertText('es una alerta made by efrain');
+                } else {
+                    console.log('la etiqueta : --- ' + nombreEtiqueta + ' --- NO EXISTE');
+                    console.log('Etiquetas Relacionadas: ' + getEtiquetas);
+                    respuesta = 'No existe Objeto';
+                }
+            }
+            return respuesta;
         }
-
     }
-    veficarExistencia(){
-        let array = $$(this.locatorFilastable);
-        let columnas = array[1].$$('th');
-        let nombre = columnas[0].getText();
-        return nombre;
+    getListaTable(){
+        let filas = $$(this.locatorFilastable);
+        let etiquetas = [];
+        for (let i =1; i <filas.length; i++) {
+            let columnas = filas[i].$$('th');
+            etiquetas.push(columnas[0].getText());
+        }
+        return etiquetas;
     }
-
 }
 module.exports = searchObjeto;

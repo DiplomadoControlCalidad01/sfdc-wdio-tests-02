@@ -3,38 +3,39 @@ const login = require('../Page/Login.po');
 const AddObjecto = require('../Page/addObjeto.po');
 const vop = require('../Page/viewObjetosPers.po');
 
-const header  = require('../Page/header.po');
-const RouteEdit_Remove = require('../Page/routeEdit_Remove.po');
+const Menu  = require('../Page/menu.po');
+const Remove = require('../Page/remove.po');
 const Edit_object = require('../Page/edit_object.po');
 const SearchObjeto = require('../Page/searchObjeto.po');
+
 describe('Test Suite',()=>{
     beforeEach(()=>{
        login.iniciarSecion();
     });
-
-    // PRIMER TEST CASE
-
-    it('Verificar la existencia de un Objeto Personalizado en Salesforce', ()=> {
-        header.irAPanelObjetoPersonalizado();
-        let searchEtiqueta = {'nombreEtiqueta':'objeto'};
-        let searchObjeto = new SearchObjeto();
-        searchObjeto.buscarobjeto(searchEtiqueta.nombreEtiqueta);
-       // browser.pause(10000);
-    });
-
-    // SEGUNDO TEST CASE
     /*
+    // PRIMER TEST CASE
+    it('Verificar la existencia de un Objeto Personalizado en Salesforce', ()=> {
+        let menu = new Menu();
+        menu.clickMenuObjetos();
+        let searchEtiqueta = {'nombreEtiqueta':'Marcos'}; // ingresar la nombre del objeto a Buscar
+        let searchObjeto = new SearchObjeto();
+        searchObjeto.buscarObjeto(searchEtiqueta.nombreEtiqueta);//imprime en consola si existe el objeto
+    });
+  */
+     /*
+    // SEGUNDO TEST CASE
     it('Crear un Objeto Personalizado en Salesforce',()=>{
-        header.irAPanelObjetoPersonalizado();
+        let menu = new Menu();
+        menu.clickMenuObjetos();
         let ValuesOP = {
-                "Etiqueta": "objeto10",
-                "EtiquetaPlural": "objetos10",
-                "Sexo": "f", // sexo: f,m [f=Femenino, m=Masculino]
-                "NombreObjeto": "nameObjeto10",  // el nombre de objeto tiene que ser unico
-                "Descripcion": "Esto es una descripcion  ficha",
-                "NombreDelRegistro": "NameRegistroIs",
+                "Etiqueta": "Marco",
+                "EtiquetaPlural": "Marcos",
+                "Sexo": "m", // sexo: f,m [f=Femenino, m=Masculino]
+                "NombreObjeto": "objetoMarcos",  // el nombre de objeto tiene que ser unico
+                "Descripcion": "Esto es una descripcion del Objeto Marcos",
+                "NombreDelRegistro": "RegistroMarcos",
                 "TipoDeDatos": "AutoNumber", // valores: Text,AutoNumber [ Text= Texto, AutoNumber= Numeracion Automatica]
-                "MostrarFormato": 00, // solo ceros cantidad no mayor a 9
+                "MostrarFormato": 000, // solo ceros cantidad no mayor a 9
                 "NumeroInicio": 1, // introducir un numero positivo
                 // 1 = true, 0 = false
                 "PermitirInformes": 1,
@@ -49,27 +50,28 @@ describe('Test Suite',()=>{
        };
         let addObjeto = new AddObjecto();
         addObjeto.CrearObjetoPersonalizado(ValuesOP);
-        addObjeto.saveObjetoPersonalizado();
-        addObjeto.iraGestorObjetos();
-         let searchObjeto = new SearchObjeto();
-         let objetoagregado = searchObjeto.buscarobjeto(ValuesOP.Etiqueta);
+        addObjeto.GuardarObjeto();
+        menu.clickMenuObjetos();
+        let searchObjeto = new SearchObjeto();
+        let objetoagregado = searchObjeto.buscarObjeto(ValuesOP.Etiqueta);
          addObjeto.detalleObjeto(objetoagregado);
          assert.equal(ValuesOP.Etiqueta, objetoagregado,"No se agrego el Objeto !!!!!!!");
 
          browser.pause(10000);
      });
-    */
+     */
+   /*
     // TERCER TEST CASE
-    /*
-      it('Modificar de un Objeto Personalizado',()=>{
-        header.irAPanelObjetoPersonalizado();
+    it('Modificar de un Objeto Personalizado',()=>{
+        let menu = new Menu();
+        menu.clickMenuObjetos();
         let objetoAModif = {
-            "Antigua_Etiqueta": "objeto2",
-            "new_Etiqueta":"Objeto6a", //
-            "new_EtiquetaPlural": "objetos6a",
-            "new_Sexo":"m", // sexo: f,m [f=Femenino, m=Masculino]
-            "new_NombreObjeto": "nameobjeto", // Obligatoriamente tiene q cambiar el dato
-            "new_Descripcion": "Esto es una descripcion  de objeto6a",
+            "Antigua_Etiqueta": "Marco",
+            "new_Etiqueta":"Miriam", //
+            "new_EtiquetaPlural": "dafads",
+            "new_Sexo":"f", // sexo: f,m [f=Femenino, m=Masculino]
+            "new_NombreObjeto": "adfadsf", // Obligatoriamente tiene q cambiar el dato
+            "new_Descripcion": "Esto es una descripcion  de de Miriam qefrq",
             "new_NombreDelRegistro": "nombre de registro",
             "new_TipoDeDatos": "Text", // valores: Text,AutoNumber [ Text= Texto, AutoNumber= Numeracion Automatica]
             "new_MostrarFormato": 00, // solo ceros cantidad no mayor a 9
@@ -77,24 +79,27 @@ describe('Test Suite',()=>{
             // 1 = true, 0 = false
             "new_PermitirInformes": 1,
             "new_PermitirActividades": 0,
-            "new_PermitirSeguimientoDeHistorial": 1,
+            "new_PermitirSeguimientoDeHistorial": 0,
             "new_PermitirGruposDeChatter": 1,
             "new_ClasificacionObjeto": 1,
+            "new_EstadoDeImplementacion":"En desarrollo", // valores (En desarrollo, implementado)
             "new_PermitirBuscar": 1
         };
         let editarObjeto = new Edit_object();
         editarObjeto.modifyObject(objetoAModif);
         browser.pause(10000);
     });
-    */
+     */
     // CUARTO TEST CASE
-    /*
+
     it('Eliminar un Objeto Pesonalizado',()=>{
-        header.irAPanelObjetoPersonalizado();
-        let  objetoAeliminar ={ 'nameEtiqueta':'objeto10' };
-        let remove = new RouteEdit_Remove();
+        let menu = new Menu();
+        menu.clickMenuObjetos();
+        let  objetoAeliminar ={ 'nameEtiqueta':'Miriam' };
+        let remove = new Remove();
         remove.eliminarObjeto(objetoAeliminar.nameEtiqueta);
-        browser.pause(10000);
+        let searchObjeto = new SearchObjeto();
+        searchObjeto.buscarObjeto(objetoAeliminar.nameEtiqueta);
     });
-   */
+
 });
