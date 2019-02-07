@@ -7,13 +7,13 @@ class searchObjeto{
     buscarObjeto(nombreEtiqueta){
         commonActions.setvalue(this.locatorPanelBuscarObjeto,nombreEtiqueta);
         commonActions.pause();
-        const getEtiquetas = this.getListaTable(nombreEtiqueta);
+        const getEtiquetas = this.getListaTable();
         let respuesta;
         if(typeof getEtiquetas !== 'undefined' && getEtiquetas.length > 0) {
             for (var valor of getEtiquetas) {
                 if (valor === nombreEtiqueta) {
                     console.log('Existe el objeto con Etiqueta: ' + valor);
-                    respuesta = valor;
+                    return respuesta = valor;
                     //browser.sendAlertText('es una alerta made by efrain');
                 } else {
                     console.log('la etiqueta : --- ' + nombreEtiqueta + ' --- NO EXISTE');

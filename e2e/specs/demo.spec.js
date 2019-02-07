@@ -7,6 +7,8 @@ const Menu  = require('../Page/menu.po');
 const Remove = require('../Page/remove.po');
 const Edit_object = require('../Page/edit_object.po');
 const SearchObjeto = require('../Page/searchObjeto.po');
+const AddCampo = require('../Page/addCampoAObjeto');
+const SearchCampo = require('../Page/searchCampoRelaciones.po');
 
 describe('Test Suite',()=>{
     beforeEach(()=>{
@@ -92,7 +94,7 @@ describe('Test Suite',()=>{
      */
     // CUARTO TEST CASE
 
-    it('Eliminar un Objeto Pesonalizado',()=>{
+    /*it('Eliminar un Objeto Pesonalizado',()=>{
         let menu = new Menu();
         menu.clickMenuObjetos();
         let  objetoAeliminar ={ 'nameEtiqueta':'Miriam' };
@@ -101,5 +103,23 @@ describe('Test Suite',()=>{
         let searchObjeto = new SearchObjeto();
         searchObjeto.buscarObjeto(objetoAeliminar.nameEtiqueta);
     });
+  */
+    // QUINTO TEST CASE
+    it('Verificar que permita agregar  un campo de tipo fecha a un objeto',()=>{
+       let menu = new Menu();
+       menu.clickMenuObjetos();
+       let objetoAmodificar = {
+           'nombreObjeto' : 'Ariel',
+            'nombreCampo' : 'Fecha5'
+       };
+       let addCampo = new AddCampo();
+       addCampo.addCampoAobjeto(objetoAmodificar.nombreObjeto,objetoAmodificar.nombreCampo);
+       let searchCampos = new SearchCampo();
+       let campo = searchCampos.buscarObjeto(objetoAmodificar.nombreCampo);
+       console.log(campo);
 
+       browser.pause(10000);
+
+
+    });
 });
