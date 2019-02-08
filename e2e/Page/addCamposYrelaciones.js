@@ -2,7 +2,7 @@ const commonActions = require('../core/CommonActions');
 const Search = require('../Page/searchObjeto.po');
 const Objeto = require('../Page/objeto.po')
 const componentesObjeto = require('../Page/componentesObjeto.po');
-class addCampo extends Objeto{
+class addCamposYrelaciones extends Objeto{
     constructor(){
         super();
         this.l_botonNewCampo = '//button[@title="Campo personalizado"]';
@@ -34,4 +34,4 @@ class addCampo extends Objeto{
 
     }
 }
-module.exports = addCampo;
+module.exports = addCamposYrelaciones;

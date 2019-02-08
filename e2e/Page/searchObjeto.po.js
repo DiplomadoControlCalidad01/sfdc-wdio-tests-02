@@ -3,11 +3,12 @@ class searchObjeto{
     constructor(){
         this.locatorPanelBuscarObjeto = '//input[@class=\'slds-input input\']';
         this.locatorFilastable = '//table[@class="slds-table slds-table--bordered uiVirtualDataGrid--default uiVirtualDataGrid"]//tr';
+
     }
     buscarObjeto(nombreEtiqueta){
         commonActions.setvalue(this.locatorPanelBuscarObjeto,nombreEtiqueta);
         commonActions.pause();
-        const getEtiquetas = this.getListaTable();
+        const getEtiquetas = this.getListaTable(this.locatorFilastable);
         let respuesta;
         if(typeof getEtiquetas !== 'undefined' && getEtiquetas.length > 0) {
             for (var valor of getEtiquetas) {
@@ -24,8 +25,9 @@ class searchObjeto{
             return respuesta;
         }
     }
-    getListaTable(){
-        let filas = $$(this.locatorFilastable);
+    // Retorna un lista de valores de etiquetas TH
+    getListaTable(locatorFilatable){
+        let filas = $$(locatorFilatable);
         let etiquetas = [];
         for (let i =1; i <filas.length; i++) {
             let columnas = filas[i].$$('th');
@@ -33,5 +35,16 @@ class searchObjeto{
         }
         return etiquetas;
     }
+    // Retorna un lista de valores de etiquetas TD
+    getListaTableTD(locatorFilatable){
+        let filas = $$(locatorFilatable);
+        let etiquetas = [];
+        for (let i =1; i <filas.length; i++) {
+            let columnas = filas[i].$$('td');
+            etiquetas.push(columnas[0].getText());
+        }
+        return etiquetas;
+    }
+
 }
 module.exports = searchObjeto;
